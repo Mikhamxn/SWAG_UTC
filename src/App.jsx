@@ -1,49 +1,81 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { AuthProvider } from "./contexto/AuthContext";
+import { ThemeProvider } from "./contexto/ThemeContext";
+import Login from "./contenido/Auth/Login";
+import Registro from "./contenido/Auth/Registro";
+import { Toaster } from "./componentes/ui/toaster";
+import Dashboard from "./contenido/paginas/Dashboard";
+import ProtectedRoute from "./componentes/ProtectedRoute";
+import Layout from "./componentes/Layout";
+import DashboardLayout from "./componentes/DashboardLayout";
+import NotFound from "./contenido/paginas/NotFound";
+import Materias from "./contenido/paginas/Materias";
+import "./App.css";
 
 function App() {
-  const [lstMaterias, setLstMaterias] = useState([])
-
-  useEffect(() => {
-    // Simulación de llamada a API
-    const datos = [
-      {
-        intMateria: 1,
-        strClave: "MAT101",
-        strNombre: "Matemáticas Básicas",
-        intTotalSesiones: 40
-      },
-      {
-        intMateria: 2,
-        strClave: "HIS201",
-        strNombre: "Historia Universal",
-        intTotalSesiones: 30
-      }
-    ]
-    setLstMaterias(datos)
-  }, [])
-
-  console.log(lstMaterias)
   return (
-    <>
-   <form>
-        <h2>Listado de Materias</h2>
+    <Router>
+      <ThemeProvider>
+        <AuthProvider>
+          <Toaster />
+          <Helmet>
+          <title>
+            SWAG - Sistema Web de Asistencia y Gestionamiento
+          </title>
+          <meta
+            name="description"
+            content="Sistema integral para la gestión de asistencia y administración académica con control de estudiantes, materias, horarios y reportes en tiempo real."
+          />
+          <meta
+            name="keywords"
+            content="asistencia, gestión académica, estudiantes, materias, horarios, administración, educación, control"
+          />
+          <meta name="author" content="SWAG UTC" />
+          <meta
+            property="og:title"
+            content="SWAG - Sistema Web de Asistencia y Gestionamiento"
+          />
+          <meta
+            property="og:description"
+            content="Sistema integral para la gestión de asistencia y administración académica"
+          />
+          <meta property="og:type" content="website" />
+        </Helmet>
 
-        {lstMaterias.length === 0 ? (
-          <p>No hay materias registradas.</p>
-        ) : (
-          lstMaterias.map((x) => (
-            <div key={x.intMateria} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
-              <p><strong>ID:</strong> {x.intMateria}</p>
-              <p><strong>Clave:</strong> {x.strClave}</p>
-              <p><strong>Nombre:</strong> {x.strNombre}</p>
-              <p><strong>Total de sesiones:</strong> {x.intTotalSesiones}</p>
-            </div>
-          ))
-        )}
-      </form>
-    </>
-  )
+          <div className="app-background">
+            <Routes>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Layout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate to="dashboard" replace />} />
+              <Route path="dashboard" element={<DashboardLayout />}>
+                <Route index element={<Dashboard />} />
+
+              </Route>
+              <Route path="materias" element={<Materias />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/registro" element={<Registro />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<Navigate to="/404" replace />} />
+            </Routes>
+          </div>
+        </AuthProvider>
+      </ThemeProvider>
+    </Router>
+  );
 }
 
-export default App
+export default App;
