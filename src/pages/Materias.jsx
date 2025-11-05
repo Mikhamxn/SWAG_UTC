@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import React, { useEffect, useState } from 'react'
 
-function App() {
+function Materias() {
   const [lstMaterias, setLstMaterias] = useState([])
 
   useEffect(() => {
@@ -24,9 +23,10 @@ function App() {
   }, [])
 
   console.log(lstMaterias)
+
   return (
     <>
-   <form>
+      <form>
         <h2>Listado de Materias</h2>
 
         {lstMaterias.length === 0 ? (
@@ -46,4 +46,4 @@ function App() {
   )
 }
 
-export default App
+export default Materias
