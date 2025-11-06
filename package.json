@@ -1,0 +1,15 @@
+{
+  "name": "swag-utc",
+  "private": true,
+  "workspaces": [
+    "SWAG_UTC_F",
+    "SWAG_UTC_B"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix ./SWAG_UTC_F\" \"npm run dev --prefix ./SWAG_UTC_B\"",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
