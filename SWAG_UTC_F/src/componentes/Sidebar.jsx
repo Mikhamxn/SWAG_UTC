@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 const navItems = [
   { to: "/dashboard", label: "Panel" },
   { to: "/materias", label: "Materias" },
+  { to: "/horarios", label: "Horarios" },
   { to: "/registro-alumnos", label: "Registro de Alumnos" },
 ];
 

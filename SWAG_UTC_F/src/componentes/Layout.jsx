@@ -4,6 +4,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
+const BarraAnimada = motion.aside;
+const CapaAnimada = motion.div;
+const ContenidoAnimado = motion.div;
+
 const Layout = () => {
   const ubicacion = useLocation();
   const [barraAbierta, establecerBarraAbierta] = useState(false);
@@ -13,7 +17,7 @@ const Layout = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-slate-100 via-slate-50 to-slate-100 dark:bg-oscuro-100 dark:bg-none">
-      <motion.aside
+      <BarraAnimada
         initial={false}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.35, ease: "easeOut" }}
@@ -22,11 +26,11 @@ const Layout = () => {
         }`}
       >
         <Sidebar cerrarBarra={cerrarBarra} />
-      </motion.aside>
+      </BarraAnimada>
 
       <AnimatePresence>
         {barraAbierta && (
-          <motion.div
+          <CapaAnimada
             className="fixed inset-0 z-30 bg-slate-900/40 backdrop-blur-sm lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -40,7 +44,7 @@ const Layout = () => {
       <div className="min-h-screen lg:pl-72">
         <Header alHacerClickMenu={alternarBarra} />
         <main className="px-4 pb-10 pt-6 sm:px-6 lg:px-10">
-          <motion.div
+          <ContenidoAnimado
             key={ubicacion.pathname}
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -48,7 +52,7 @@ const Layout = () => {
             className="mx-auto max-w-7xl"
           >
             <Outlet />
-          </motion.div>
+          </ContenidoAnimado>
         </main>
       </div>
     </div>

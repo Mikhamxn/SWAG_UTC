@@ -18,6 +18,7 @@ import DashboardLayout from "./componentes/DashboardLayout";
 import NotFound from "./contenido/paginas/NotFound";
 import Materias from "./contenido/paginas/Materias";
 import RegistroAlumnos from "./contenido/paginas/RegistroAlumnos";
+import Horarios from "./contenido/paginas/Horarios";
 import "./App.css";
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
                 </Route>
 
                 <Route path="materias" element={<Materias />} />
+                <Route path="horarios" element={<Horarios />} />
                 <Route path="registro-alumnos" element={<RegistroAlumnos />} />
               </Route>
 
