@@ -2,52 +2,53 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../hooks/useTheme";
 
-const MotionHeader = motion.header;
-const MotionButton = motion.button;
+const Encabezado = motion.header;
+const BotonAnimado = motion.button;
 
-const Header = ({ onMenuClick }) => {
+const Header = ({ alHacerClickMenu }) => {
   const { theme, toggleTheme } = useTheme();
-  const isDark = theme === "dark";
+  const esModoOscuro = theme === "dark";
 
   return (
-    <MotionHeader
-      className="app-header"
-      initial={{ y: -40, opacity: 0 }}
+    <Encabezado
+      className="border-b border-slate-200/70 bg-white/90 backdrop-blur-xl dark:border-oscuro-200/60 dark:bg-oscuro-100/80"
+      initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <div className="app-header__left">
-        <MotionButton
-          type="button"
-          className="app-header__menu"
-          onClick={onMenuClick}
-          whileTap={{ scale: 0.96 }}
-          whileHover={{ scale: 1.02 }}
-          transition={{ type: "spring", stiffness: 320, damping: 20 }}
-        >
-          Menú
-        </MotionButton>
-        <div>
-          <h1 className="app-header__title">
-            SWAG · Sistema Web de Asistencia y Gestionamiento
-          </h1>
-          <p className="app-header__subtitle">Gestión académica centralizada</p>
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-10">
+        <div className="flex items-center gap-4">
+          <BotonAnimado
+            type="button"
+            className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm transition hover:border-primario-200 hover:text-primario-600 dark:border-oscuro-200 dark:bg-oscuro-100 dark:text-neutro-200 dark:hover:border-esmeralda-500/40 dark:hover:text-esmeralda-500 lg:hidden"
+            onClick={alHacerClickMenu}
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 260, damping: 18 }}
+          >
+            Menú
+          </BotonAnimado>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.32em] text-slate-400 dark:text-neutro-400">
+              Gestión Académica
+            </p>
+            <h1 className="text-lg font-semibold text-slate-900 dark:text-neutro-50 sm:text-2xl">
+              SWAG · Sistema Web de Asistencia y Gestionamiento
+            </h1>
+          </div>
         </div>
-      </div>
-      <div className="app-header__actions">
+
         <button
           type="button"
-          className="theme-toggle"
           onClick={toggleTheme}
-          aria-pressed={!isDark}
-          aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+          aria-pressed={esModoOscuro}
+          aria-label={esModoOscuro ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+          className="inline-flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-500 shadow-sm transition hover:border-primario-200 hover:text-primario-600 dark:border-oscuro-200 dark:bg-oscuro-100 dark:text-neutro-300 dark:hover:border-esmeralda-500/40 dark:hover:text-esmeralda-500"
         >
-          <span className="theme-toggle__text">
-            {isDark ? "Modo oscuro" : "Modo claro"}
-          </span>
+          <span>{esModoOscuro ? "Modo oscuro" : "Modo claro"}</span>
         </button>
       </div>
-    </MotionHeader>
+    </Encabezado>
   );
 };
 

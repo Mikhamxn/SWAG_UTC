@@ -1,14 +1,14 @@
 import axios from "axios";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api/";
+const URL_BASE = import.meta.env.VITE_API_URL?.replace(/\/$/, "") || "http://localhost:3000/api";
 
 export const crearMateria = async (materia) => {
   try {
-    const response = await axios.post(`${BASE_URL}Materias`, materia, {
+    const respuesta = await axios.post(`${URL_BASE}/materias`, materia, {
       withCredentials: true,
       headers: { "Content-Type": "application/json" },
     });
-    return response.data;
+    return respuesta.data;
   } catch (error) {
     if (error.response) {
       console.error("El servidor respondió con:", error.response.data);
@@ -17,9 +17,9 @@ export const crearMateria = async (materia) => {
   }
 };
 
-export const getMaterias = async () => {
-  const response = await axios.get(`${BASE_URL}Materias`, {
+export const obtenerMaterias = async () => {
+  const respuesta = await axios.get(`${URL_BASE}/materias`, {
     withCredentials: true,
   });
-  return response.data;
+  return respuesta.data;
 };
