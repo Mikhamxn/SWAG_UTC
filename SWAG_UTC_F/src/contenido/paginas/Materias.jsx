@@ -217,7 +217,7 @@ const Materias = () => {
         )}
 
         <div className="materias__list">
-          {materias.map((materia) => (
+          {materias?.datos?.map((materia) => (
             <MotionCard
               key={materia.intMateria || materia.id || materia.strClave}
               className="materias__item"

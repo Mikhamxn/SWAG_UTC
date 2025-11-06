@@ -32,6 +32,14 @@ export const gestorErrores = (error, req, res, next) => {
     });
   }
 
+  if (error.message === 'Origen no permitido por la configuración CORS.') {
+    registro.advertencia('Intento de acceso desde un origen no autorizado', error);
+    return res.status(403).json({
+      error: 'OrigenNoPermitido',
+      mensaje: 'El origen de la petición no está autorizado por la política CORS.'
+    });
+  }
+
   const status = error.statusCode || error.status || 500;
   const mensaje = error.message || 'Ocurrió un error inesperado en el servidor.';
 

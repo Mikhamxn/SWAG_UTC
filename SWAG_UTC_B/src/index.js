@@ -10,7 +10,24 @@ import './api/materias/materia.model.js';
 
 const aplicacion = express();
 
-aplicacion.use(cors());
+const opcionesCors = {
+  origin: (origen, concluir) => {
+    const permitidos = configuracion.origenesPermitidos;
+    if (!origen) {
+      concluir(null, true);
+      return;
+    }
+    if (permitidos.length === 0 || permitidos.includes(origen)) {
+      concluir(null, true);
+      return;
+    }
+    concluir(new Error('Origen no permitido por la configuración CORS.'));
+  },
+  credentials: true
+};
+
+aplicacion.use(cors(opcionesCors));
+aplicacion.options('*', cors(opcionesCors));
 aplicacion.use(express.json());
 
 aplicacion.get('/salud', (req, res) => {
