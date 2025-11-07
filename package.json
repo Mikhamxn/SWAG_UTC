@@ -1,0 +1,14 @@
+{
+  "name": "swag-utc",
+  "private": true,
+  "scripts": {
+    "preinstall": "node -e \"console.log('Preparando instalación de proyectos.');\"",
+    "postinstall": "npm -C ./SWAG_UTC_F install --legacy-peer-deps && npm -C ./SWAG_UTC_B install --legacy-peer-deps",
+    "install:all": "npm -C ./SWAG_UTC_F install --legacy-peer-deps && npm -C ./SWAG_UTC_B install --legacy-peer-deps",
+    "dev": "concurrently \"npm run dev --prefix ./SWAG_UTC_F\" \"npm run dev --prefix ./SWAG_UTC_B\"",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
