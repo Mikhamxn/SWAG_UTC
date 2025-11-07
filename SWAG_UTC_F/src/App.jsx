@@ -8,7 +8,7 @@ import {
 import { Helmet } from "react-helmet-async";
 import { AuthProvider } from "./contexto/AuthContext";
 import { ThemeProvider } from "./contexto/ThemeContext";
-import Login from "./contenido/Auth/Login";
+
 import Registro from "./contenido/Auth/Registro";
 import { Toaster } from "./componentes/ui/toaster";
 import Dashboard from "./contenido/paginas/Dashboard";
@@ -19,6 +19,12 @@ import NotFound from "./contenido/paginas/NotFound";
 import Materias from "./contenido/paginas/Materias";
 import RegistroAlumnos from "./contenido/paginas/RegistroAlumnos";
 import Horarios from "./contenido/paginas/Horarios";
+import Profesores from "./contenido/paginas/Cruds/Profesores";
+import Alumnos from "./contenido/paginas/Cruds/Alumnos";
+import Asignacion from "./contenido/paginas/Cruds/Asignacion";
+import LoginA from "./contenido/paginas/LoginA";
+import LoginM from "./contenido/paginas/LoginM";
+
 import "./App.css";
 
 function App() {
@@ -72,10 +78,16 @@ function App() {
               </Route>
 
               {/* RUTAS PÚBLICAS */}
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Navigate to="/loginA" replace />} />
               <Route path="/registro" element={<Registro />} />
               <Route path="/404" element={<NotFound />} />
               <Route path="*" element={<Navigate to="/404" replace />} />
+              <Route path="/profesores" element={<Profesores />} />
+              <Route path="/alumnos" element={<Alumnos />} />
+              <Route path="/asignacion" element={<Asignacion />} />
+              <Route path="/loginA" element={<LoginA />} />
+              <Route path="/loginM" element={<LoginM />} />
+
             </Routes>
           </div>
         </AuthProvider>
