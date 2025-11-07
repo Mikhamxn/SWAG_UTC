@@ -12,7 +12,7 @@ Hemos optado por un *stack* robusto, utilizando la base de datos SQL Server.
 | :--- | :--- | :--- |
 | **Base de Datos** | **SQL Server** | SGBD empresarial robusto para garantizar la integridad y escalabilidad de los registros de asistencia de alto volumen. |
 | **Backend (API)** | **Node.js con Express.js** | Plataforma rápida y asíncrona, ideal para manejar las peticiones concurrentes de escaneo de QR y validación de Face ID. |
-| **ORM / Cliente DB** | `mssql` (Driver) / Azure Data Studio | Driver para interactuar con SQL Server / Administración visual de la base de datos. |
+| **ORM / Cliente DB** | `mssql` (Driver) / Somee/SMMS/DBEaver| Driver para interactuar con SQL Server / Administración visual de la base de datos. |
 
 ---
 
